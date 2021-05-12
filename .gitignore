@@ -1,0 +1,9 @@
+.vscode
+env
+./website/__pycache__
+./website/db
+./website/config.py
+./website/utils/__pycache__
+./signin.css
+./signin.html
+./navbar.html

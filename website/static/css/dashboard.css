@@ -1,0 +1,18 @@
+/*.item-form{
+	display: none;
+}*/
+*::before{
+	box-sizing: border-box;
+}
+
+.search-area{
+	margin: 40px;
+	margin-left: 0px;
+	margin-right: 150px;
+}
+
+.page-header{
+	display: flex;
+	margin: 20px;
+	justify-content: space-between;
+}

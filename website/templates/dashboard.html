@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block head_content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+
+{% block content %}
+
+<h1 style="text-align: center;">Accounts</h1>
+<div class="search-area">
+	<div class="input-group">
+		<input type="search" class="form-control rounded" placeholder="Search Account" aria-label="Search"
+			aria-describedby="search-addon" id="search" name="search" />
+	</div>
+</div>
+
+<div class="container">
+	<!-- Vault table -->
+	<div class="row">
+		<div class="col-10">
+			<div class="page-header">
+				<h1 style="font-size: 25px; font-weight:bold;">My Vault</h1>
+				<div class="add-button">
+					<!-- Button trigger modal -->
+					<button type="button" class="btn btn-outline-secondary" data-toggle="modal"
+						data-target="#exampleModalCenter">
+						<i class="fa fa-plus" aria-hidden="true"></i> add item
+					</button>
+
+					<!-- Modal -->
+					<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+						aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLongTitle">Add new Account</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<form action="{{ url_for('views.dashboard') }}" method="POST">
+										<p>{{ form.hidden_tag() }}</p>
+
+										<p>{{ form.name.label }}<span style="color: red;">*</span> </p>
+										<p>{{ form.name(class="form-control") }}</p>
+
+										<p>{{ form.username.label }}<span style="color: red;">*</span> </p>
+										<p>{{ form.username(class="form-control") }}</p>
+
+										<p>{{ form.password.label }}<span style="color: red;">*</span> </p>
+										<p>{{ form.password(class="form-control") }}</p>
+
+										<p>{{ form.website.label }}</p>
+										<p>{{ form.website(class="form-control") }}</p>
+
+										<p>{{ form.notes.label }}</p>
+										<p>{{ form.notes(cols="50", rows="7") }}</p>
+
+										{{ form.submit(class="btn btn-primary")}}
+									</form>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<table class="table table-sm table-hover">
+				<tbody>
+					{% for account in user.accounts %}
+					<tr scope="row">
+						<td class="table-list-checkbox">
+							<input type="checkbox" name="" id="">
+						</td>
+						<td class="table-list-icon"></td>
+						<td>
+							<a href="#">{{ account.name}}</a>
+							<br>
+							<small id="username">{{ account.username}}</small>
+						</td>
+						<td>
+							<div class="dropdown">
+								<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2"
+									data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<i class="fa fa-cog" aria-hidden="true"></i>
+								</button>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+									<button class="dropdown-item" type="button" id="copyPassword"><i class="fa fa-clone"
+											aria-hidden="true"></i> Copy
+										Password</button>
+									<button class="dropdown-item" type="button" id="copyUsername"><i class="fa fa-clone"
+											aria-hidden="true"></i> Copy
+										Username</button>
+									<button class="dropdown-item" type="button" style="color: red;"><i
+											class="fa fa-eraser" aria-hidden="true"></i> delete</button>
+								</div>
+							</div>
+						</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+		</div>
+	</div>
+	<!-- End of Vault table -->
+</div>
+<script src="{{ url_for('static', filename='js/copyToClipboard.js')}}"></script>
+{% endblock %}

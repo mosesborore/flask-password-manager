@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block head_content %}
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/sign-up.css') }}">
+{% endblock %}
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+	<h1>Sign In</h1>
+
+	<form action="" method="POST" >
+
+		<p>{{ form.hidden_tag() }}</p>
+
+		<p>{{ form.username.label }}</p>
+		<p>{{ form.username(class="form-control") }}</p>
+		{% for error in form.username.errors %}
+			{% if error %}
+				<span style="color: red; margin-bottom: 50px;">{{ error }}</span>
+			{% endif %}
+		{% endfor %}
+
+		<p>{{ form.email.label }}</p>
+		<p>{{ form.email(type="email", class="form-control") }}</p>
+
+		<p>{{ form.master_password.label }}</p>
+		<p>{{ form.master_password(class="form-control") }}</p>
+		{% for error in form.master_password.errors %}
+			{% if error %}
+				<span style="color: red;">{{ error }}</span>
+			{% endif %}
+		{% endfor %}
+
+
+		<p>{{ form.confirm_password.label }}</p>
+		<p>{{ form.confirm_password(class="form-control") }}</p>
+		{% for error in form.confirm_password.errors %}
+			{% if error %}
+				<span style="color: red;">{{ error }}</span>
+			{% endif %}
+		{% endfor %}
+
+
+		<p>{{ form.remember_me() }}{{ form.remember_me.label }}</p>
+
+
+		<p>{{ form.submit(class="btn btn-primary") }}</p>
+	</form>
+
+</div>
+
+{% endblock %}
